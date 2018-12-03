@@ -6,6 +6,7 @@ var cssvars = require('postcss-simple-vars');
 var nested = require('postcss-nested');
 var cssImport = require('postcss-import');
 var autoprefixerCore = require('autoprefixer-core');
+var browserSync = require('browser-sync').create();
 //var postcssFunctionsVar = require('postcss-functions');
 
 
@@ -24,8 +25,16 @@ gulp.task('styles', function(){
 });
 
 gulp.task('watch', function(){
+
+    browserSync.init({ 
+        server: {
+            baseDir: 'app'
+        }
+    });
+
     watch('./app/index.html', function(){
-        gulp.start('html');
+        //gulp.start('html');
+        browserSync.reload();
     });
 
     watch('./app/assets/styles/styles.css', function(){
